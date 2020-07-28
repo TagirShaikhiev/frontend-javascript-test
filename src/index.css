@@ -21,6 +21,8 @@ code {
   font-size: 14px;
   border-collapse: collapse;
   text-align: center;
+  /* margin: auto; */
+  margin-top: 100px;
 }
 
 th, td:first-child {
@@ -42,3 +44,27 @@ td {
 th:first-child, td:first-child {
   text-align: left;
 }
+
+.pagination {
+  margin: 0.5rem;
+  border: black;
+
+}
+
+.container {
+  margin-left: 3rem;
+  margin-right: 3rem; 
+  margin-top: 3rem; 
+  position: relative;
+  background:orange;
+}
+
+.search, .pages, .server, .table, .pages {
+    margin: auto;
+    background: orange;
+}
+/* 
+.addNewPerson {
+  position: absolute;
+  display: block;
+} */
