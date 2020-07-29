@@ -48,23 +48,67 @@ th:first-child, td:first-child {
 .pagination {
   margin: 0.5rem;
   border: black;
-
 }
 
 .container {
   margin-left: 3rem;
   margin-right: 3rem; 
   margin-top: 3rem; 
-  position: relative;
-  background:orange;
+  position: absolute;
+  /* background:orange; */
+  width: 700px;
 }
 
-.search, .pages, .server, .table, .pages {
+.search, .pages, .server, .table, .pages, .addNewPerson {
     margin: auto;
-    background: orange;
 }
-/* 
-.addNewPerson {
-  position: absolute;
+
+.newPerson {
+  /* position: absolute; */
   display: block;
-} */
+  border: 1px solid black;
+  top: 20px;
+  position: absolute;
+  background: paleturquoise;
+  width: 300px;
+  text-align: left;
+  margin: 5px;
+}
+
+.addTable {
+  float: right;
+  right: 5px;
+}
+
+.clearNewPerson {
+  top: -2000px !important;   
+}
+
+.addPersonButton {
+  margin: auto;
+  left: 15px;
+}
+
+.informationTable {
+  position: relative;
+  margin: auto;
+  margin-bottom: 10px;
+  width: 700px;
+  padding: 10px;
+  text-align: center;
+}
+
+.isLoading {
+   margin: auto;
+   text-align: center;
+   background-color: paleturquoise;
+   width: 100px;
+   height: 100px;
+   left: 50%;
+   top: 40px;
+}
+
+.pages {
+  width: 500px;
+  overflow: auto;
+}

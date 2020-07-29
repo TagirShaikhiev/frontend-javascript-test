@@ -42,46 +42,50 @@ export class Table extends React.Component<Props, State> {
     const { personsStore } = this.props;
 
     if (personsStore?.isLoading) {
-      return <div className="container">Is loading</div>;
+      return <div className="container isLoading">Is loading</div>;
     }
 
     return (
       <div className="container">
-        <div className="addNewPerson">
-          <button className="">Добавить данные</button>
-          <AddTableRow personsStore={personsStore} />
-        </div>
-        <div className="server">
-          <button
-            onClick={() => {
-              this.setStatus(false);
-            }}
-          >
-            Small data
-          </button>
-          <button
-            onClick={() => {
-              this.setStatus(true);
-            }}
-          >
-            Big data
-          </button>
-        </div>
-        <div className="search">
-          <input
-            type="text"
-            value={this.state.search}
-            onChange={(event) =>
-              this.setState({ search: event.currentTarget.value })
-            }
-          />
-          <button
-            onClick={() =>
-              this.props.personsStore?.setSearch(this.state.search)
-            }
-          >
-            Поиск
-          </button>
+        <div className="informationTable">
+          <div className="addNewPerson">
+            <button onClick={() => this.showAddPerson()}>Добавить данные</button>
+            <div className="newPerson clearNewPerson">
+            <AddTableRow personsStore={personsStore} />
+            </div>
+          </div>
+          <div className="server">
+            <button
+              onClick={() => {
+                this.setStatus(false);
+              }}
+            >
+              Small data
+            </button>
+            <button
+              onClick={() => {
+                this.setStatus(true);
+              }}
+            >
+              Big data
+            </button>
+          </div>
+          <div className="search">
+            <input
+              type="text"
+              value={this.state.search}
+              onChange={(event) =>
+                this.setState({ search: event.currentTarget.value })
+              }
+            />
+            <button
+              onClick={() =>
+                this.props.personsStore?.setSearch(this.state.search)
+              }
+            >
+              Поиск
+            </button>
+          </div>
         </div>
         <table className="table">
           <thead>
@@ -136,4 +140,11 @@ export class Table extends React.Component<Props, State> {
   changeSorting = (sortingParams: SortParam) => {
     this.props.personsStore?.setSorting(sortingParams);
   };
+
+  showAddPerson = () => {
+    if (document.querySelector(".newPerson.clearNewPerson")?.classList.length === 2) {
+      return document.querySelector(".newPerson.clearNewPerson")?.classList.remove("clearNewPerson");
+    } 
+    return document.querySelector(".newPerson")?.classList.add("clearNewPerson");
+  }
 }

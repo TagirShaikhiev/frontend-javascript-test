@@ -27,13 +27,13 @@ export const AddTableRow: React.FC<Props> = (props) => {
     };
 
     return (
-        <div className="newPerson">
-            Id <input name="ID" type="number" onChange={event => (newPerson.id = +event.currentTarget.value)}/> <hr />
-            Last name<input type="text" onChange={event => (newPerson.lastName = event.currentTarget.value)}/> <hr />
-            First name<input type="text" onChange={event => (newPerson.firstName = event.currentTarget.value)}/> <hr />
-            Phone <input type="text" onChange={event => (newPerson.phone = event.currentTarget.value)}/> <hr />
-            Email <input type="text" onChange={event => (newPerson.email = event.currentTarget.value)}/> <hr />
-            <button onClick={() => props.personsStore?.addNewPerson(newPerson)}>Добавить</button> <hr />
+        <div>
+            <div>Id <input className="addTable" type="number" onChange={event => (newPerson.id = +event.currentTarget.value)} /> </div>
+            <div>Last name<input className="addTable" type="text" onChange={event => (newPerson.lastName = event.currentTarget.value)}/> </div>
+            <div>First name<input className="addTable" type="text" onChange={event => (newPerson.firstName = event.currentTarget.value)}/> </div>
+            <div>Phone <input className="addTable" type="text" onChange={event => (newPerson.phone = event.currentTarget.value)}/> </div>
+            <div>Email <input className="addTable" type="text" onChange={event => (newPerson.email = event.currentTarget.value)}/> </div>
+            <div className="addPersonButton"><button onClick={() => props.personsStore?.addNewPerson(newPerson)}>Добавить</button> </div>
         </div>
     )
 }

@@ -1,8 +1,6 @@
 import { IPerson } from '../Interfaces'
 import { observable, computed, action } from 'mobx'
 import { networkService } from '../../services/network.service'
-import { isNumber } from 'util';
-import { copyFile } from 'fs';
 
 export type SortParam = {
     column: keyof IPerson;
@@ -15,9 +13,6 @@ export class PersonsStore {
 
     @observable 
     private _persons: IPerson[] = [];
-
-    @observable 
-    private _personsSort: IPerson[] = [];
     
     @observable
     private _isLoading: boolean = false;
@@ -27,9 +22,6 @@ export class PersonsStore {
 
     @observable
     private _availablePages: number = 0;
-
-    @observable
-    private _availablePagesSort: number = 0;
 
     @observable
     private _sorting: SortParam | null = null;
@@ -68,19 +60,13 @@ export class PersonsStore {
             } else {
                 copy.sort((prev, next) => ((prev[key] as number) - (next[key] as number)) * ( arr? 1:-1 ));    
             }
-        }
-        let result = copy.filter(person => `${person.id} ${person.firstName} ${person.lastName} ${person.email} ${person.phone}`.toLowerCase().includes(this.searchTerm.toLowerCase())).slice(this._currentPage * 50, this._currentPage * 50 + 50);
-        this._personsSort = result;
-
-        return result;
+        } 
+        return copy.filter(person => `${person.id} ${person.firstName} ${person.lastName} ${person.email} ${person.phone}`.toLowerCase().includes(this.searchTerm.toLowerCase())).slice(this._currentPage * 50, this._currentPage * 50 + 50);
     }
 
     @computed 
     get availablePages(): number { 
-        if (this._availablePagesSort == 0) {
-            return this._availablePages;
-        }
-        return this._availablePagesSort;
+        return this._availablePages;
     }
 
     @computed 
@@ -91,11 +77,6 @@ export class PersonsStore {
     @computed 
     get currentPerson(): IPerson { 
         return this._currentPerson;
-    }
-
-    @action
-    clearPagesSort(page: number): void {
-        this._availablePagesSort = 0;
     }
 
     @action
@@ -112,18 +93,8 @@ export class PersonsStore {
         else {
             this._persons = await networkService.get<IPerson[]>('http://www.filltext.com/?rows=32&id=%7Bnumber%7C1000%7D&firstName=%7BfirstName%7D&lastName=%7BlastName%7D&email=%7Bemail%7D&phone=%7Bphone%7C(xxx)xxx-xx-xx%7D&address=%7BaddressObject%7D&description=%7Blorem%7C32%7D')       
         }
-        this.setPages();
+        this._availablePages = Math.ceil(this._persons.length / 50);
         this._isLoading = false;
-    }
-
-    @action 
-    setPages() {
-        this._availablePages = Math.ceil(this._persons.length / 50);       
-    }
-
-    @action 
-    setPagesSort(pers: IPerson[]) {
-        this._availablePagesSort = Math.ceil(pers.length / 50);       
     }
 
     @action
@@ -145,7 +116,6 @@ export class PersonsStore {
     setCurrentPerson (curPerson: IPerson) {
             this._currentPerson = curPerson;
     }
-
 }
 
   
