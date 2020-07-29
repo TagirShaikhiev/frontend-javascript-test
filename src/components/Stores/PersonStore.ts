@@ -117,5 +117,3 @@ export class PersonsStore {
             this._currentPerson = curPerson;
     }
 }
-
-  
